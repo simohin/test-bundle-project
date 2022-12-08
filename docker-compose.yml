@@ -1,0 +1,26 @@
+version: '3'
+services:
+  backend:
+    restart: always
+    container_name: backend
+    environment:
+      DB_NAME: backend_db
+      DB_USERNAME: backend_user
+      DB_PASSWORD: password
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+  frontend:
+    restart: always
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        BACKEND_URL: http://localhost:8080
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
