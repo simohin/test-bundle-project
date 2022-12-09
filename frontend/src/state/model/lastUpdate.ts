@@ -7,10 +7,14 @@ export interface LastUpdateState {
     updated: string,
 }
 
+export const isPresent = (state: LastUpdateState) => {
+    return state.id !== undefined && state.amount !== undefined && state.updated !== undefined
+}
+
 const initialState: LastUpdateState = {
-    id: 0,
-    amount: 0,
-    updated: ''
+    id: undefined as unknown as number,
+    amount: undefined as unknown as number,
+    updated: undefined as unknown as string
 }
 
 export const lastUpdate = createModel<RootModel>()({
