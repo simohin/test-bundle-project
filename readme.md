@@ -1,7 +1,13 @@
 ### Запуск
+Перед запуском скопируй _**.env.template**_ в _**.env**_ и заполни секреты
 
+Команда для сборки контейнеров
 ```
-docker-compose build && docker-compose up
+docker-compose build
+```
+Команда для запуска
+```
+docker-compose up
 ```
 
 ### Доступ к бд

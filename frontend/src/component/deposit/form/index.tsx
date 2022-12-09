@@ -1,6 +1,6 @@
 import {Button, createNumberMask, Form, TextField} from "@qiwi/pijma-desktop";
 import React from "react";
-import {DepositService} from "../../../deposit";
+import {DepositService} from "../../../service/deposit";
 
 export const DepositForm: React.FC = () => {
 
