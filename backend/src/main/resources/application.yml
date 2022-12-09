@@ -1,4 +1,11 @@
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ${OAUTH_GITHUB_CLIENT_ID:clientId}
+            clientSecret: ${OAUTH_GITHUB_CLIENT_SECRET:clientSecret}
   datasource:
     url: jdbc:h2:mem:${DB_NAME:db}
     username: ${DB_USERNAME:sa}

@@ -1,5 +1,5 @@
 import {Models} from '@rematch/core'
-import {lastUpdate} from './lastUpdate'
+import {lastUpdate} from './model/lastUpdate'
 
 export interface RootModel extends Models<RootModel> {
     lastUpdate: typeof lastUpdate

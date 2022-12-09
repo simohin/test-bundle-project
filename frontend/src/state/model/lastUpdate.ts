@@ -1,5 +1,5 @@
 import {createModel} from '@rematch/core'
-import type {RootModel} from '.'
+import {RootModel} from "../index";
 
 export interface LastUpdateState {
     id: number,

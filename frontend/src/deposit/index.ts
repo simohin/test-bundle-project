@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {Dispatch} from "../state/model/store";
+import {Dispatch} from "../state/store";
 
 export const DepositService = () => {
     const dispatch = useDispatch<Dispatch>()

@@ -1,7 +1,7 @@
 import {Box, Breaker, Section, Typo} from "@qiwi/pijma-desktop";
 import React from "react";
 import {useSelector} from "react-redux";
-import {RootState} from "../../state/model/store";
+import {RootState} from "../../state/store";
 import {isPresent} from "../../state/model/lastUpdate";
 
 export const LastUpdate: React.FC = () => {
