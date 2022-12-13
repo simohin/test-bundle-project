@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security.filter
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletRequest
@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.GenericFilterBean
+import test.bundle.project.backend.service.security.TokenProvider
 import java.util.logging.Logger
 
 @Component

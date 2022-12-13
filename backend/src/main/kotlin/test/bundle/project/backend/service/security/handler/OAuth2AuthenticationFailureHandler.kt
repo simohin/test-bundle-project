@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security.handler
 
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
@@ -7,7 +7,8 @@ import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler
 import org.springframework.stereotype.Component
 import org.springframework.web.util.UriComponentsBuilder
-import test.bundle.project.backend.config.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.REDIRECT_URI_PARAM_COOKIE_NAME
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.REDIRECT_URI_PARAM_COOKIE_NAME
 import test.bundle.project.backend.util.CookieUtils
 
 @Component
@@ -19,7 +20,7 @@ class OAuth2AuthenticationFailureHandler(
         response: HttpServletResponse?,
         exception: AuthenticationException?
     ) {
-        var targetUrl: String = CookieUtils.getCookie(request!!, REDIRECT_URI_PARAM_COOKIE_NAME)!!
+        var targetUrl: String = CookieUtils.getCookie(request!!, REDIRECT_URI_PARAM_COOKIE_NAME)
             .map(Cookie::getValue)
             .orElse("/")
 

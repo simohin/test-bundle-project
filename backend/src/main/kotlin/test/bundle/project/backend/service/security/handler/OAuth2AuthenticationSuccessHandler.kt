@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security.handler
 
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
@@ -8,9 +8,12 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
 import org.springframework.stereotype.Component
 import org.springframework.web.util.UriComponentsBuilder
-import test.bundle.project.backend.config.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.COOKIES_LIFETIME_SECONDS
-import test.bundle.project.backend.config.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME
-import test.bundle.project.backend.config.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.REDIRECT_URI_PARAM_COOKIE_NAME
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.COOKIES_LIFETIME_SECONDS
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository.Companion.REDIRECT_URI_PARAM_COOKIE_NAME
+import test.bundle.project.backend.service.security.TokenProvider
+import test.bundle.project.backend.service.security.model.AppProperties
 import test.bundle.project.backend.util.CookieUtils
 import java.net.URI
 import java.util.Optional
@@ -35,7 +38,6 @@ class OAuth2AuthenticationSuccessHandler(
             return
         }
 
-        clearAuthenticationAttributes(request, response)
         CookieUtils.addCookie(
             response,
             OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME,

@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

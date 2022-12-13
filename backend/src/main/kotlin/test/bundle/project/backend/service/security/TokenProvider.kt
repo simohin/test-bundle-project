@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
@@ -15,6 +15,10 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User
 import org.springframework.stereotype.Service
+import test.bundle.project.backend.service.security.model.AppProperties
+import test.bundle.project.backend.service.security.model.JwtContent
+import test.bundle.project.backend.service.security.model.toAuthentication
+import test.bundle.project.backend.service.security.model.toJwtContent
 import java.security.SignatureException
 import java.util.Date
 import java.util.logging.Logger
@@ -40,14 +44,13 @@ class TokenProvider(
         val expiryDate = Date(now.time + appProperties.auth.tokenExpirationMsec)
         val oauthToken: OAuth2AuthenticationToken = authentication as OAuth2AuthenticationToken
         val loadAuthorizedClient = oauth2AuthorizedClientService.loadAuthorizedClient<OAuth2AuthorizedClient>(
-            oauthToken.authorizedClientRegistrationId,
-            oauthToken.name
+            oauthToken.authorizedClientRegistrationId, oauthToken.name
         )
 
         val jwtContent = userPrincipal.toJwtContent(loadAuthorizedClient.accessToken)
         val jwt = objectMapper.writeValueAsString(jwtContent)
-        return Jwts.builder().setSubject(jwt).setIssuedAt(Date()).setExpiration(expiryDate)
-            .signWith(signingKey).compact()
+        return Jwts.builder().setSubject(jwt).setIssuedAt(Date()).setExpiration(expiryDate).signWith(signingKey)
+            .compact()
     }
 
     fun readToken(token: String): Authentication {

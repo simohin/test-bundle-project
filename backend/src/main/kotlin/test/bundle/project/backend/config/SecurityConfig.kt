@@ -1,4 +1,4 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -7,6 +7,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+import test.bundle.project.backend.service.security.HttpCookieOAuth2AuthorizationRequestRepository
+import test.bundle.project.backend.service.security.RestAuthenticationEntryPoint
+import test.bundle.project.backend.service.security.filter.RestOAuth2AuthorizationFilter
+import test.bundle.project.backend.service.security.handler.OAuth2AuthenticationFailureHandler
+import test.bundle.project.backend.service.security.handler.OAuth2AuthenticationSuccessHandler
+import test.bundle.project.backend.service.security.model.AppProperties
 
 @Configuration
 @EnableWebSecurity

@@ -1,14 +1,14 @@
-package test.bundle.project.backend.config.security
+package test.bundle.project.backend.service.security
 
 import com.nimbusds.oauth2.sdk.util.StringUtils
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import test.bundle.project.backend.util.CookieUtils
 
-@Component
+@Service
 class HttpCookieOAuth2AuthorizationRequestRepository : AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
     companion object {
