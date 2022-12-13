@@ -1,18 +1,17 @@
 import {Block, BlockContent, Button, Flex, FlexItem} from "@qiwi/pijma-desktop";
 import React from "react";
-import {Navigate, useSearchParams} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "../../state/store";
+import {useCookies} from "react-cookie";
 
 export const Login = () => {
 
     const dispatch = useDispatch<Dispatch>()
 
-    const [searchParams] = useSearchParams()
-    const receivedToken = searchParams.get("token")
+    const [cookies] = useCookies(['JWT_TOKEN']);
+    const receivedToken = cookies.JWT_TOKEN
 
-    console.log(receivedToken)
-    console.log(!(!searchParams))
     if (!(!receivedToken)) {
         dispatch.auth.update({
             isAuthorized: true,

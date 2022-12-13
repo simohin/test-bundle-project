@@ -24,8 +24,10 @@ app:
   cors:
     allowedOrigins: http://localhost:3000,http://localhost:8080
   oauth2:
-    defaultSuccessUrl: ${OAUTH_DEFAULT_SUCCESS_URL:http://localhost:3000/login}
+    defaultSuccessUrl: ${OAUTH_DEFAULT_SUCCESS_URL:http://localhost:3000}
     authorizedRedirectUris:
       - http://localhost:3000/oauth2/redirect
       - myandroidapp://oauth2/redirect
       - myiosapp://oauth2/redirect
+server:
+  max-http-request-header-size: 1MB

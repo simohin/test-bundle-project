@@ -56,10 +56,7 @@ class OAuth2AuthenticationSuccessHandler(
             throw RuntimeException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication")
         }
         val targetUrl = redirectUri.orElse(appProperties.oauth2.defaultSuccessUrl)
-        val token = tokenProvider.createToken(authentication!!)
-        return UriComponentsBuilder.fromUriString(targetUrl)
-            .queryParam("token", token)
-            .build().toUriString()
+        return UriComponentsBuilder.fromUriString(targetUrl).build().toUriString()
     }
 
     protected fun clearAuthenticationAttributes(request: HttpServletRequest?, response: HttpServletResponse?) {

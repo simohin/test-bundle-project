@@ -49,7 +49,12 @@ class HttpCookieOAuth2AuthorizationRequestRepository : AuthorizationRequestRepos
         )
         val redirectUriAfterLogin = request!!.getParameter(REDIRECT_URI_PARAM_COOKIE_NAME)
         if (StringUtils.isNotBlank(redirectUriAfterLogin)) {
-            CookieUtils.addCookie(response, REDIRECT_URI_PARAM_COOKIE_NAME, redirectUriAfterLogin, COOKIES_LIFETIME_SECONDS)
+            CookieUtils.addCookie(
+                response,
+                REDIRECT_URI_PARAM_COOKIE_NAME,
+                redirectUriAfterLogin,
+                COOKIES_LIFETIME_SECONDS
+            )
         }
     }
 

@@ -4,26 +4,25 @@ import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.util.SerializationUtils
+import java.util.Arrays
 import java.util.Base64
 import java.util.Optional
 
 object CookieUtils {
-    fun getCookie(request: HttpServletRequest, name: String?): Optional<Cookie> {
-        val cookies: Array<Cookie> = request.cookies
-        if (cookies.isNotEmpty()) {
-            for (cookie in cookies) {
-                if (cookie.name.equals(name)) {
-                    return Optional.of<Cookie>(cookie)
-                }
-            }
-        }
-        return Optional.empty<Cookie>()
-    }
+    fun getCookie(request: HttpServletRequest, name: String?): Optional<Cookie> = Arrays.stream(request.cookies)
+        .filter { it.name.equals(name) }
+        .findFirst()
 
-    fun addCookie(response: HttpServletResponse, name: String?, value: String?, maxAge: Int) {
+    fun addCookie(
+        response: HttpServletResponse,
+        name: String?,
+        value: String?,
+        maxAge: Int,
+        httpOnly: Boolean? = false
+    ) {
         val cookie = Cookie(name, value)
         cookie.path = "/"
-        cookie.isHttpOnly = true
+        cookie.isHttpOnly = httpOnly!!
         cookie.maxAge = maxAge
         response.addCookie(cookie)
     }

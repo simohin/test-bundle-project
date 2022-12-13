@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
@@ -13,7 +14,8 @@ class SecurityConfig(
     private val restAuthenticationEntryPoint: RestAuthenticationEntryPoint,
     private val cookieAuthorizationRequestRepository: HttpCookieOAuth2AuthorizationRequestRepository,
     private val oAuth2AuthenticationSuccessHandler: OAuth2AuthenticationSuccessHandler,
-    private val oAuth2AuthenticationFailureHandler: OAuth2AuthenticationFailureHandler
+    private val oAuth2AuthenticationFailureHandler: OAuth2AuthenticationFailureHandler,
+    private val restOAuth2AuthorizationFilter: RestOAuth2AuthorizationFilter,
 ) {
 
     @Bean
@@ -23,6 +25,13 @@ class SecurityConfig(
     ): SecurityFilterChain {
 
         http
+            .authorizeHttpRequests {
+                it.requestMatchers("/login/**")
+                    .permitAll()
+                it.anyRequest()
+                    .authenticated()
+            }
+            .addFilterBefore(restOAuth2AuthorizationFilter, BasicAuthenticationFilter::class.java)
             .cors()
             .and()
             .sessionManagement()
@@ -34,12 +43,6 @@ class SecurityConfig(
             .exceptionHandling()
             .authenticationEntryPoint(restAuthenticationEntryPoint)
             .and()
-            .authorizeHttpRequests {
-                it.requestMatchers("/login/**")
-                    .permitAll()
-                it.anyRequest()
-                    .authenticated()
-            }
             .oauth2Login()
             .defaultSuccessUrl(appProperties.oauth2.defaultSuccessUrl)
             .authorizationEndpoint()
