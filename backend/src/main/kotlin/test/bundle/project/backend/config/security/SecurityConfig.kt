@@ -34,12 +34,12 @@ class SecurityConfig(
             .exceptionHandling()
             .authenticationEntryPoint(restAuthenticationEntryPoint)
             .and()
-//            .authorizeHttpRequests {
-//                it.requestMatchers("/","/login/**", "/oauth2/**")
-//                    .permitAll()
-//                it.anyRequest()
-//                    .authenticated()
-//            }
+            .authorizeHttpRequests {
+                it.requestMatchers("/login/**")
+                    .permitAll()
+                it.anyRequest()
+                    .authenticated()
+            }
             .oauth2Login()
             .defaultSuccessUrl(appProperties.oauth2.defaultSuccessUrl)
             .authorizationEndpoint()

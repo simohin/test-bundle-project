@@ -3,12 +3,12 @@ import {RootModel} from "../index";
 
 export interface AuthState {
     isAuthorized: boolean,
-    clientId: string,
+    token: string,
 }
 
 const initialState: AuthState = {
     isAuthorized: false,
-    clientId: undefined as unknown as string,
+    token: undefined as unknown as string,
 }
 
 export const auth = createModel<RootModel>()({

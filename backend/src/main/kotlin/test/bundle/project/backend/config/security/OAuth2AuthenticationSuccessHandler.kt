@@ -36,7 +36,12 @@ class OAuth2AuthenticationSuccessHandler(
         }
 
         clearAuthenticationAttributes(request, response)
-        CookieUtils.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, targetUrl, COOKIES_LIFETIME_SECONDS)
+        CookieUtils.addCookie(
+            response,
+            OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME,
+            tokenProvider.createToken(authentication!!),
+            COOKIES_LIFETIME_SECONDS
+        )
         redirectStrategy.sendRedirect(request, response, targetUrl)
     }
 

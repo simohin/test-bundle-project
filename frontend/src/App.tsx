@@ -1,40 +1,20 @@
 import React from 'react';
 import './App.css';
-import {
-    Block,
-    BlockContent,
-    Flex,
-    FlexItem,
-    fonts,
-    Global,
-    reset,
-    Spacer,
-    ThemeProvider,
-    themes
-} from "@qiwi/pijma-desktop";
-import {DepositForm} from "./component/deposit/form";
-import {LastUpdate} from "./component/lastUpdate";
+import {fonts, Global, reset, ThemeProvider, themes} from "@qiwi/pijma-desktop";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Main} from "./route/main";
+import {Login} from "./route/login";
 
-const App : React.FC = () => (
+const App: React.FC = () => (
     <ThemeProvider theme={themes.orange}>
         <Global styles={[reset, fonts]}/>
-        <Flex direction={"column"} justify={"center"} height={"100vh"}>
-            <FlexItem width={"100%"}>
-                <Flex justify={"space-around"} align={"center"}>
-                    <FlexItem>
-                        <Block>
-                            <BlockContent>
-                                <Spacer size="xxl">
-                                    <LastUpdate/>
-                                    <DepositForm/>
-                                </Spacer>
-                            </BlockContent>
-                        </Block>
-                    </FlexItem>
-                </Flex>
-            </FlexItem>
-        </Flex>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Main/>}/>
+                <Route path="/login" element={<Login/>}/>
+            </Routes>
+        </BrowserRouter>
+
     </ThemeProvider>
 );
-
 export default App
